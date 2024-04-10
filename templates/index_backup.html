@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plot"></div>
+    <script>
+        var data = {{ data | tojson }};
+        var x = [];
+        var y = [];
+
+        data.forEach(function(item) {
+            x.push(item.x_field_name);
+            y.push(item.y_field_name);
+        });
+
+        var trace = {
+            x: x,
+            y: y,
+            type: 'bar'
+        };
+
+        var layout = {
+            title: 'Data Visualization',
+            xaxis: {
+                title: 'X Axis'
+            },
+            yaxis: {
+                title: 'Y Axis'
+            }
+        };
+
+        Plotly.newPlot('plot', [trace], layout);
+    </script>
+</body>
+</html>
